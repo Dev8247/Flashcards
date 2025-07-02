@@ -6,13 +6,13 @@ from subject_model import detect_subject
 
 app = FastAPI()
 
-# Request body for POST
+
 class FlashcardRequest(BaseModel):
     student_id: str
     question: str
     answer: str
 
-# POST /flashcard
+# POST 
 @app.post("/flashcard")
 def create_flashcard(data: FlashcardRequest):
     subject = detect_subject(data.question)
@@ -22,7 +22,7 @@ def create_flashcard(data: FlashcardRequest):
         "subject": subject
     }
 
-# GET /get-subject?student_id=stu001&limit=5
+# GET 
 @app.get("/get-subject")
 def get_flashcards(student_id: str = Query(...), limit: int = Query(5)) -> List[dict]:
     cards = get_mixed_flashcards(student_id, limit)
